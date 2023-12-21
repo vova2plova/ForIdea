@@ -1,6 +1,13 @@
-﻿namespace UserService.Models
+﻿using Microsoft.AspNetCore.Identity;
+
+namespace UserService.Models
 {
-    public class User
+    public class GoogleAPIData
+    {
+        public string ClientId { get; set; }
+        public string ClientSecret { get; set; }
+    }
+    public class User : IdentityUser
     {
         public int Id { get; set; }
         public string Name { get; set; }
@@ -11,6 +18,7 @@
     public class Curriculum
     {
         public int Id { get; set; }
+        public string Name { get; set; }
         public User User { get; set; }
         public string Path { get; set; }
     }
@@ -32,6 +40,8 @@
         public string Name { get; set; }
         public string Description { get; set; } 
         public List<Vacancy> Vacancies { get; set; }
+        public List<User> HRs { get; set; }
+        public User Creator { get; set; }
     }
 
     public class Vacancy 

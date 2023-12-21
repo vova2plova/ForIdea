@@ -22,6 +22,17 @@ namespace UserService.Controllers
         }
 
         [HttpGet]
+        [Route("google-logout")]
+        public async void GoogleLogout()
+        {
+            var properties = new AuthenticationProperties()
+            {
+                RedirectUri = Url.Action("GoogleResponse")
+            };
+            await HttpContext.SignOutAsync(properties);
+        }
+
+        [HttpGet]
         [Route("google-response")]
         public async Task<IActionResult> GoogleResponse()
         {

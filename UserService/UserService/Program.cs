@@ -1,4 +1,6 @@
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Newtonsoft.Json;
+using UserService.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -8,6 +10,7 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+var _googleAPIData = LoadJson();
 builder.Services.AddAuthentication(options =>
 	{
 		options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
@@ -18,8 +21,8 @@ builder.Services.AddAuthentication(options =>
 	})
 	.AddGoogle(options =>
 	{
-		options.ClientId = "854859848350-3c37ubq7d63hf2q3isfhsece5p9db459.apps.googleusercontent.com";
-		options.ClientSecret = "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";
+		options.ClientId = _googleAPIData.ClientId;
+		options.ClientSecret = _googleAPIData.ClientSecret;
 	});
 
 var app = builder.Build();
@@ -40,3 +43,12 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
+
+GoogleAPIData LoadJson()
+{
+    using (StreamReader r = new StreamReader("GoogleAPIData.json"))
+    {
+        string json = r.ReadToEnd();
+        return JsonConvert.DeserializeObject<GoogleAPIData>(json);
+    }
+}
