@@ -1,5 +1,7 @@
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
+using UserService;
 using UserService.Models;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -24,6 +26,11 @@ builder.Services.AddAuthentication(options =>
 		options.ClientId = _googleAPIData.ClientId;
 		options.ClientSecret = _googleAPIData.ClientSecret;
 	});
+
+builder.Services.AddDbContext<ApplicationDbContext>(options =>
+{
+	options.UseNpgsql("Host=dpg-cm2171fqd2ns73d7bjb0-a.oregon-postgres.render.com;Port=5433;Database=foridea;Username=vova2plova;Password=FBOwDNeQi4puVxhD5V59cktteRyWIqiU");
+});
 
 var app = builder.Build();
 
