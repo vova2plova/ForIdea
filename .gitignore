@@ -400,3 +400,4 @@ FodyWeavers.xsd
 #Json Api data
 UserService/UserService/GoogleAPIData.json
 AuthService/AuthService/GoogleAPIData.json
+AuthService/AuthService/GoogleAPIData.json
