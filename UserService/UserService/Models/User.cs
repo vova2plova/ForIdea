@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Identity;
-using UserService.Enums;
+﻿using UserService.Enums;
 
 namespace UserService.Models
 {
